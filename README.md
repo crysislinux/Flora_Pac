@@ -2,11 +2,11 @@
 
 A PAC(Proxy auto-config) file generator with fetched China IP range, which helps walk around GFW.
 
-Inspired by https://github.com/fivesheep/chnroutes .
+Inspired by https://github.com/Leask/Flora_Pac.git .
 
 ## Installation
 <pre>
-$ git clone https://github.com/Leask/Flora_Pac.git
+$ git clone https://github.com/crysislinux/Flora_Pac.git
 </pre>
 
 ## Usage
@@ -35,6 +35,12 @@ $ ./flora_pac -x 'SOCKS5 127.0.0.1:8964; SOCKS 127.0.0.1:8964; DIRECT' -p 8970
 <pre>
 @ Get PAC file for proxy 'SOCKS 127.0.0.1:8964':
 $ curl http://flora.leaskh.com/pac?proxy=SOCKS%20127.0.0.1%3A8964
+
+* [NEW] Add custom safe domains by safe-domains.txt
+<pre>
+Safe Domains will pass the check.
+See safe-domains.txt.sample
+</pre>
 --- --- --- --- --- --- ---
 @ Get PAC file for proxy 'SOCKS5 127.0.0.1:8964':
 $ curl http://flora.leaskh.com/pac?proxy=SOCKS5%20127.0.0.1%3A8964
