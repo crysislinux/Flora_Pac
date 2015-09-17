@@ -9,7 +9,16 @@ import argparse
 import math
 import socket
 import struct
+import os.path
 
+
+def getExternalSafeDomains():
+    domainFile = './safe-domains.txt'
+    if not os.path.isfile(domainFile):
+        return [];
+
+    with open(domainFile) as f:
+        return [line.rstrip('\n') for line in f]
 
 def ip2long(ip):
     packedIP = socket.inet_aton(ip)
@@ -417,7 +426,19 @@ function FindProxyForURL(url, host) {
         'zhubajie.com' : 1,
         'zongheng.com' : 1
     };
+    """
+    externalSafeDomains = getExternalSafeDomains()
+    if len(externalSafeDomains) > 0:
+        domainsStr = '["' + '", "'.join(externalSafeDomains) + '"]'
+        strLines += """
+        var externalSafeDomains = %s;
+        var m;
+        for(m = 0; m < externalSafeDomains.length; m++){
+            safeDomains[externalSafeDomains[m]] = 1
+        }
+        """%(domainsStr)
 
+    strLines += """
     var dangerDomains = {
      // 'apple.com' : 1,
         'google.com' : 1,
